@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1c26">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Owen Center">
+<title>Owen Center · ศูนย์รวมระบบงาน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     ปรับสี / ไอคอนกลุ่ม ได้ที่นี่ · แก้ลิงก์ที่ตัวแปร GROUPS ล่างสุด
+     ============================================================ */
+  :root{
+    --bg:#eef2f6;
+    --surface:#ffffff;
+    --ink:#122029;
+    --muted:#64748b;
+    --steel:#0f1c26;
+    --line:#dbe3ec;
+    --bp:#0d8091;        /* กลุ่มอู่สี BP (ฟ้าอมเขียว) */
+    --bp-soft:#e3f4f6;
+    --spc:#e5921b;       /* กลุ่มงานโยธา SPC (เหลืองงานช่าง) */
+    --spc-soft:#fdf1dc;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(15,28,38,.05), 0 10px 28px rgba(15,28,38,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:"Sarabun",system-ui,-apple-system,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;min-height:100dvh;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    background:var(--steel);color:#fff;position:sticky;top:0;z-index:20;
+    padding:14px 20px calc(14px + env(safe-area-inset-top));
+    padding-top:max(14px, env(safe-area-inset-top));
+    display:flex;align-items:center;gap:12px;
+    box-shadow:0 4px 18px rgba(15,28,38,.18);
+  }
+  .mark{
+    width:40px;height:40px;flex:0 0 auto;border-radius:11px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--bp),var(--spc));
+    font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px;color:#0f1c26;
+  }
+  .topbar .name{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:19px;letter-spacing:.3px}
+  .topbar .sub{font-size:12px;opacity:.72;margin-top:-2px}
+
+  /* ---------- Layout ---------- */
+  .wrap{max-width:1080px;margin:0 auto;
+    padding:26px 18px calc(70px + env(safe-area-inset-bottom))}
+
+  /* ---------- Search ---------- */
+  .search{position:relative;margin:0 0 26px}
+  .search input{
+    width:100%;padding:14px 16px 14px 46px;font-size:16px;font-family:inherit;
+    border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);
+    outline:none;transition:border-color .15s, box-shadow .15s;box-shadow:var(--shadow);
+  }
+  .search input:focus{border-color:var(--bp);box-shadow:0 0 0 3px rgba(13,128,145,.16)}
+  .search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.4}
+
+  /* ---------- Section ---------- */
+  .section{margin-bottom:30px}
+  .sec-head{display:flex;align-items:baseline;gap:10px;margin:0 4px 14px;
+    padding-bottom:10px;border-bottom:2px solid var(--line);position:relative}
+  .sec-head::after{content:"";position:absolute;left:0;bottom:-2px;width:56px;height:2px;background:var(--gc)}
+  .eyebrow{font-family:"Space Grotesk",sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .sec-title{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:22px;color:var(--gc)}
+  .sec-tag{font-size:13px;color:var(--muted);margin-left:auto;align-self:center}
+
+  /* ---------- Grid + Card ---------- */
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .card{
+    position:relative;display:flex;align-items:center;gap:14px;overflow:hidden;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 18px 18px 22px;text-decoration:none;color:inherit;box-shadow:var(--shadow);
+    transition:transform .13s ease, box-shadow .13s ease, border-color .13s ease;
+    min-height:98px;-webkit-tap-highlight-color:transparent;
+  }
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--gc)}
+  .card:hover{transform:translateY(-3px);border-color:var(--gc);
+    box-shadow:0 3px 6px rgba(15,28,38,.08),0 16px 34px rgba(15,28,38,.12)}
+  .card:active{transform:translateY(-1px)}
+  .card:focus-visible{outline:3px solid var(--gc);outline-offset:2px}
+  .ic{width:50px;height:50px;flex:0 0 auto;border-radius:13px;display:grid;place-items:center;
+    font-size:25px;background:var(--gsoft)}
+  .txt{min-width:0}
+  .txt .name{font-weight:700;font-size:16px;line-height:1.25;margin-bottom:3px}
+  .txt .desc{font-size:13px;color:var(--muted);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .arrow{margin-left:auto;flex:0 0 auto;color:var(--muted);opacity:.7}
+
+  .empty{text-align:center;color:var(--muted);padding:48px 0;font-size:15px}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:8px}
+
+  /* ---------- Motion ---------- */
+  .card{opacity:0;transform:translateY(8px);animation:rise .4s ease forwards}
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){
+    .card{animation:none;opacity:1;transform:none}
+    .card:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="mark">O</div>
+  <div>
+    <div class="name">Owen Center</div>
+    <div class="sub">ศูนย์รวมระบบงาน · BP / SPC</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="search">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+    </svg>
+    <input id="q" type="search" placeholder="ค้นหาระบบ / แดชบอร์ด…" autocomplete="off">
+  </div>
+
+  <div id="app"></div>
+  <footer>แตะการ์ดเพื่อเปิดระบบ · เพิ่มลงหน้าจอโฮมเพื่อเปิดเหมือนแอป</footer>
+</div>
+
+<script>
+/* ==============================================================
+   แก้ / เพิ่มลิงก์ได้ที่นี่ที่เดียว
+   แต่ละกลุ่ม: label(หัวข้อ) · tag(หมายเหตุ) · color/soft(สี) · items
+   แต่ละระบบ: name · desc · url · icon(อีโมจิ)
+   ============================================================== */
+const GROUPS = [
+  {
+    eyebrow:"Dashboard", label:"BP", tag:"อู่สี มิตซูสงขลา",
+    color:"var(--bp)", soft:"var(--bp-soft)",
+    items:[
+      { name:"MTSBodyPaint", desc:"ระบบจัดการซ่อมรถอู่สี มิตซูสงขลา", icon:"🎨",
+        url:"https://script.google.com/macros/s/AKfycbxyTTqIZiulEESM1ex3Bj9ghDHP6x1rjAH9w7lx9hrnR1m1SZfkQ5K8OBxbrroOR-gs/exec" },
+      { name:"MTS BP Inventory", desc:"ระบบเบิกวัสดุสิ้นเปลืองอู่สี มิตซูสงขลา", icon:"📦",
+        url:"https://script.google.com/macros/s/AKfycbwwCRzzJocp4IIRILmmq247MlHc9-czUWf4MDGIDgDcaUGzPiUJKeV3BeTzIPVDkIkmUA/exec" },
+    ]
+  },
+  {
+    eyebrow:"Dashboard", label:"SPC", tag:"ส.พิชิตการโยธา",
+    color:"var(--spc)", soft:"var(--spc-soft)",
+    items:[
+      { name:"SPC Mechanic", desc:"ระบบจัดการงานช่าง ส.พิชิต", icon:"🔧",
+        url:"https://docs.google.com/spreadsheets/d/1zyCcu97j0x91rNgcGPN5JiZTWVHRpbvYqXJTmhKeY0Y/edit?usp=sharing" },
+      { name:"SPC Driver", desc:"ระบบจัดการขับรถ ส.พิชิต", icon:"🚚",
+        url:"https://docs.google.com/spreadsheets/d/15ODuApMJvDLvKBHVc1iMepiV8di3CLKW7AFiP4XX0pM/edit?usp=sharing" },
+      { name:"SPC Backhoe", desc:"ระบบจัดการขับแบ็คโฮ ส.พิชิต", icon:"🚜",
+        url:"https://docs.google.com/spreadsheets/d/1qJcN9zW_dLf5u8SaU7BE2lUihftiZVuyKLpUe1qEJMU/edit?usp=sharing" },
+    ]
+  },
+];
+
+const app = document.getElementById("app");
+const q = document.getElementById("q");
+
+function cardHTML(it){
+  const ext = /^https?:/.test(it.url) ? ' target="_blank" rel="noopener"' : '';
+  return `<a class="card"${ext} href="${it.url}">
+    <div class="ic">${it.icon||"🔗"}</div>
+    <div class="txt">
+      <div class="name">${it.name}</div>
+      <div class="desc">${it.desc||""}</div>
+    </div>
+    <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+  </a>`;
+}
+
+function render(term=""){
+  const t = term.trim().toLowerCase();
+  let html = "", any = false, delay = 0;
+  for(const g of GROUPS){
+    const items = g.items.filter(x =>
+      (x.name+" "+(x.desc||"")).toLowerCase().includes(t));
+    if(!items.length) continue;
+    any = true;
+    html += `<section class="section" style="--gc:${g.color};--gsoft:${g.soft}">
+      <div class="sec-head">
+        <span class="eyebrow">${g.eyebrow}</span>
+        <span class="sec-title">${g.label}</span>
+        <span class="sec-tag">${g.tag}</span>
+      </div>
+      <div class="grid">
+        ${items.map(it=>{
+          const c = cardHTML(it).replace('class="card"',
+            `class="card" style="animation-delay:${(delay++)*45}ms"`);
+          return c;
+        }).join("")}
+      </div>
+    </section>`;
+  }
+  app.innerHTML = any ? html : '<div class="empty">ไม่พบระบบที่ค้นหา</div>';
+}
+
+q.addEventListener("input", ()=>render(q.value));
+render();
+</script>
+</body>
+</html>
