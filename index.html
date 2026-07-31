@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f1c26">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Owen Center">
-<title>Owen Center · ศูนย์รวมระบบงาน</title>
+<meta name="apple-mobile-web-app-title" content="S.PICHIT">
+<title>S.PICHIT · ศูนย์รวมระบบงาน</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -44,9 +44,7 @@
     box-shadow:0 4px 18px rgba(15,28,38,.18);
   }
   .mark{
-    width:40px;height:40px;flex:0 0 auto;border-radius:11px;display:grid;place-items:center;
-    background:linear-gradient(135deg,var(--bp),var(--spc));
-    font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px;color:#0f1c26;
+    height:40px;width:auto;flex:0 0 auto;display:block;object-fit:contain;
   }
   .topbar .name{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:19px;letter-spacing:.3px}
   .topbar .sub{font-size:12px;opacity:.72;margin-top:-2px}
@@ -112,9 +110,9 @@
 <body>
 
 <div class="topbar">
-  <div class="mark">O</div>
+  <img class="mark" src="data:image/png;base64,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" alt="S.PICHIT logo">
   <div>
-    <div class="name">Owen Center</div>
+    <div class="name">S.PICHIT</div>
     <div class="sub">ศูนย์รวมระบบงาน · BP / SPC</div>
   </div>
 </div>
